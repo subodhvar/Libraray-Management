@@ -74,7 +74,7 @@ Use `.env.example` as reference. For your local setup, set:
 ### 2) Install dependencies
 
 ```powershell
-Set-Location "C:\Users\VC917AA\Downloads\Library_service"
+Set-Location "C:\Users\subodh\Downloads\Library_service"
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
@@ -85,21 +85,21 @@ If you already have local PostgreSQL running on `localhost:5432` with database `
 Optional Docker alternative:
 
 ```powershell
-Set-Location "C:\Users\VC917AA\Downloads\Library_service"
+Set-Location "C:\Users\subodh\Downloads\Library_service"
 docker compose up -d
 ```
 
 ### 4) Run migrations
 
 ```powershell
-Set-Location "C:\Users\VC917AA\Downloads\Library_service"
+Set-Location "C:\Users\subodh\Downloads\Library_service"
 .\.venv\Scripts\python.exe manage.py migrate
 ```
 
 ### 5) Run server
 
 ```powershell
-Set-Location "C:\Users\VC917AA\Downloads\Library_service"
+Set-Location "C:\Users\subodh\Downloads\Library_service"
 .\.venv\Scripts\python.exe manage.py runserver
 ```
 
@@ -148,7 +148,7 @@ Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8000/api/books/1/return/" 
 ## Test
 
 ```powershell
-Set-Location "C:\Users\VC917AA\Downloads\Library_service"
+Set-Location "C:\Users\subodh\Downloads\Library_service"
 $env:DB_ENGINE='sqlite'
 .\.venv\Scripts\python.exe manage.py test
 ```
