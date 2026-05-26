@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Neighborhood Library Dashboard</h1>
+<div class="grid">
+    <div class="card">
+        <h3>Total Books</h3>
+        <p>{{ book_count }}</p>
+    </div>
+    <div class="card">
+        <h3>Total Members</h3>
+        <p>{{ member_count }}</p>
+    </div>
+    <div class="card">
+        <h3>Active Loans</h3>
+        <p>{{ active_loan_count }}</p>
+    </div>
+</div>
+
+<div class="card" style="margin-top:16px;">
+    <h3>Recent Loans</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Book</th>
+                <th>Member</th>
+                <th>Borrowed At</th>
+                <th>Due Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in recent_loans %}
+            <tr>
+                <td>{{ loan.book.title }}</td>
+                <td>{{ loan.member.full_name }}</td>
+                <td>{{ loan.borrowed_at }}</td>
+                <td>{{ loan.due_date }}</td>
+                <td>{% if loan.returned_at %}Returned{% else %}Active{% endif %}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">No loans yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

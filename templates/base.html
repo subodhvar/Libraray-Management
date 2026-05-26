@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neighborhood Library Service</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+        header { background: #0f172a; color: white; padding: 14px 24px; }
+        nav a { color: white; margin-right: 16px; text-decoration: none; font-weight: 600; }
+        main { padding: 24px; max-width: 1100px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+        .card { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 16px; }
+        th, td { padding: 10px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+        th { background: #f8fafc; }
+        form { background: white; padding: 16px; border-radius: 8px; margin-top: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        input, textarea, select { width: 100%; padding: 8px; margin-top: 4px; margin-bottom: 10px; }
+        button { background: #2563eb; color: white; border: none; padding: 10px 14px; border-radius: 6px; cursor: pointer; }
+        .messages { margin-bottom: 16px; }
+        .message { padding: 10px 12px; border-radius: 6px; margin-bottom: 8px; }
+        .message.success { background: #dcfce7; }
+        .message.error { background: #fee2e2; }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/books/">Books</a>
+        <a href="/members/">Members</a>
+        <a href="/loans/">Loans</a>
+        <a href="/api/">API Root</a>
+    </nav>
+</header>
+<main>
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>
+

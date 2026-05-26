@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Loans</h1>
+
+<div class="grid">
+    <div>
+        <h2>Borrow a Book</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="borrow">
+            {{ borrow_form.as_p }}
+            <button type="submit">Borrow</button>
+        </form>
+    </div>
+    <div>
+        <h2>Return a Book</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="return">
+            {{ return_form.as_p }}
+            <button type="submit">Return</button>
+        </form>
+    </div>
+</div>
+
+<h2>Active Loans</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Loan ID</th>
+            <th>Book</th>
+            <th>Member</th>
+            <th>Borrowed At</th>
+            <th>Due Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for loan in active_loans %}
+        <tr>
+            <td>{{ loan.id }}</td>
+            <td>{{ loan.book.title }}</td>
+            <td>{{ loan.member.full_name }}</td>
+            <td>{{ loan.borrowed_at }}</td>
+            <td>{{ loan.due_date }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="5">No active loans.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2>Recent Loan History</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Loan ID</th>
+            <th>Book</th>
+            <th>Member</th>
+            <th>Borrowed</th>
+            <th>Returned</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for loan in all_loans %}
+        <tr>
+            <td>{{ loan.id }}</td>
+            <td>{{ loan.book.title }}</td>
+            <td>{{ loan.member.full_name }}</td>
+            <td>{{ loan.borrowed_at }}</td>
+            <td>{{ loan.returned_at|default:"Active" }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="5">No loans in history.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

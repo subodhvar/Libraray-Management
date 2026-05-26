@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Books</h1>
+{% if editing_book %}
+<p>Editing book #{{ editing_book.id }}. <a href="/books/">Cancel edit</a></p>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if editing_book %}Update Book{% else %}Save Book{% endif %}</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Published Year</th>
+            <th>Total</th>
+            <th>Available</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>{{ book.published_year|default:"-" }}</td>
+            <td>{{ book.total_copies }}</td>
+            <td>{{ book.available_copies }}</td>
+            <td><a href="/books/{{ book.id }}/edit/">Edit</a></td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="8">No books added yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
